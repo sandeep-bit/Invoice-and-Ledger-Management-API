@@ -27,7 +27,7 @@ const errorHandler = (err, req, res, next) => {
     customError.msg = `No Item found with id: ${err.value}`;
     customError.statusCode = 400;
   }
-  // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
+  //return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
   return res.status(customError.statusCode).json({ messaage: customError.msg });
 };
 

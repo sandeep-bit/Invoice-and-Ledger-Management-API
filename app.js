@@ -3,6 +3,7 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 const UserRoutes = require("./routes/UserRoutes");
+const ProfileRoutes = require("./routes/ProfileRoutes");
 
 //error Handler
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
   res.send("Bill api");
 });
 app.use("/api/v1", UserRoutes);
+app.use("/api/v1", ProfileRoutes);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);

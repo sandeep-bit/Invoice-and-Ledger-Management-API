@@ -12,7 +12,7 @@
 //     token,
 //   });
 // };
-const sendToken = (user, statusCode, res) => {
+const sendToken = (user, statusCode, res, pro) => {
   const token = user.getJWTToken();
   const options = {
     expires: new Date(
@@ -25,6 +25,7 @@ const sendToken = (user, statusCode, res) => {
     sucess: true,
     user,
     token,
+    pro,
   });
 };
 module.exports = sendToken;
