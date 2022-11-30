@@ -12,7 +12,6 @@ const ProfileSchema = new mongoose.Schema(
     phoneNumber: {
       type: Number,
       maxLength: 10,
-      unique: true,
     },
     contactAddress: {
       address: {

@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const UserRoutes = require("./routes/UserRoutes");
 const ProfileRoutes = require("./routes/ProfileRoutes");
+const CustomerRoutes = require("./routes/CustomerRoutes");
 
 //error Handler
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api/v1", UserRoutes);
 app.use("/api/v1", ProfileRoutes);
+app.use("/api/v1", CustomerRoutes);
 
 app.use(errorHandlerMiddleware);
 app.use(notFoundMiddleware);

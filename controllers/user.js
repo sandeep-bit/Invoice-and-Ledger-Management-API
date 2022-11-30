@@ -14,7 +14,7 @@ require("dotenv").config();
 exports.registerUser = catchAsyncError(async (req, res, next) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
   const user = await User.findOne({ email });
-  const profile = await Profile.findOne({ userID: user._id });
+  // const profile = await Profile.findOne({ userID: user._id });
   if (user) {
     throw new BadRequestError("User Already Registered");
   }
@@ -26,7 +26,7 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     password,
     name: `${firstName} ${lastName}`,
   });
-  sendToken(result, StatusCodes.OK, res, profile);
+  sendToken(result, StatusCodes.OK, res);
 });
 
 exports.login = catchAsyncError(async (req, res, next) => {

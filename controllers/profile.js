@@ -1,6 +1,6 @@
 const catchAsyncError = require("../middleware/catchAsyncError");
 const Profile = require("../models/ProfileModel");
-const { BadRequestError, NotFoundError } = require("../errors");
+const { NotFoundError } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 exports.createProfile = catchAsyncError(async (req, res, next) => {
   const { phoneNumber, contactAddress, website } = req.body;
@@ -63,6 +63,7 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     req.body,
     {
       new: true,
+      runValidators: true,
     }
   );
   res.status(StatusCodes.OK).json({
@@ -80,6 +81,5 @@ exports.deleteProfile = catchAsyncError(async (req, res, next) => {
   await Profile.findByIdAndRemove(_id);
   res.status(StatusCodes.OK).json({
     success: true,
-    updateProfile,
   });
 });
