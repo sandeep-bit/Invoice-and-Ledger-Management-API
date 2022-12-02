@@ -61,6 +61,7 @@ const InvoiceSchema = new Mongoose.Schema(
     invoiceNumber: {
       type: String,
       required: true,
+      unique: true,
     },
     creatorId: {
       type: Mongoose.Schema.ObjectId,

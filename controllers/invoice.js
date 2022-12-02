@@ -3,6 +3,7 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const Invoice = require("../models/InvoiceModel");
 const { StatusCodes } = require("http-status-codes");
 const Product = require("../models/ProductModel");
+const Ledger = require("../models/LedgerModel");
 
 exports.createInvoice = catchAsyncError(async (req, res, next) => {
   const {
@@ -35,6 +36,11 @@ exports.createInvoice = catchAsyncError(async (req, res, next) => {
     paymentRecords,
     shippingPrice,
     shippingStatus,
+  });
+  await Ledger.create({
+    customerId: customerId,
+    invoiceId: invoice._id,
+    description: "From Bill Number",
   });
   if (shippingStatus === "delivered") {
     invoice.items.forEach(async item => {

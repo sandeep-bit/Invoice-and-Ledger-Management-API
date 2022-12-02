@@ -57,7 +57,7 @@ exports.getCustomerDetails = catchAsyncError(async (req, res, next) => {
 
 exports.updateCustomer = catchAsyncError(async (req, res, next) => {
   const { id: _id } = req.params;
-  const customer = await Customer.findById(_id);
+  const customer = await Customer.findOne({ _id, ActiveStatus: true });
   if (!customer) {
     throw new NotFoundError("No customer Found");
   }
@@ -74,10 +74,13 @@ exports.updateCustomer = catchAsyncError(async (req, res, next) => {
 exports.deleteCustomer = catchAsyncError(async (req, res, next) => {
   const { id: _id } = req.params;
   const customer = await Customer.findById(_id);
+
   if (!customer) {
     throw new NotFoundError("No customer Found");
   }
-  await Customer.findByIdAndRemove(_id);
+
+  customer.ActiveStatus = false;
+  await customer.save({ validateBeforeSave: false });
   res.status(StatusCodes.OK).json({
     success: true,
   });

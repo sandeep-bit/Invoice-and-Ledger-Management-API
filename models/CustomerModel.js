@@ -33,6 +33,10 @@ const CustomerSchema = new mongoose.Schema(
         type: String,
       },
     },
+    ActiveStatus: {
+      type: Boolean,
+      default: true,
+    },
     userId: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
